@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Index";
+}
+<h2>Buổi học số 3:</h2>
+<p>Cách tạo project .net MVC: dotnet new mvc ...</p>
+<p>namespace là gì, cách đặt tên</p>
+<p>Cách tạo Controller và View</p>
+<p>Định tuyến (route) trong mvc</p>
+<p>IActionResult là gì? Các kiểu trả về: ViewResult, RedirectResult, RedirectToActionResult, JsonResult, FileResult, StatusCodeResult</p>
+@{
+    ViewData["Title"] = "Demo Result Types";
+}
+<div class="container mt-5">
+    <h1 class="mb-4">Demo các loại Result trong ASP.NET Core MVC</h1>
+    
+    <div class="card mb-3">
+        <div class="card-header bg-primary text-white">
+            <h5>1. ViewResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Trả về một View (trang HTML) cho client</p>
+            <a href="@Url.Action("ShowViewResult")" class="btn btn-primary">Xem ViewResult</a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-success text-white">
+            <h5>2. RedirectResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Chuyển hướng đến một URL cụ thể (ví dụ: Google)</p>
+            <a href="@Url.Action("ShowRedirectResult")" class="btn btn-success">Xem RedirectResult</a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-info text-white">
+            <h5>3. RedirectToActionResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Chuyển hướng đến một Action khác trong ứng dụng</p>
+            <a href="@Url.Action("ShowRedirectToActionResult")" class="btn btn-info">Xem RedirectToActionResult</a>
+            <a href="@Url.Action("RedirectWithParams")" class="btn btn-info">RedirectToAction với params</a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-warning text-white">
+            <h5>4. JsonResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Trả về dữ liệu dạng JSON (thường dùng cho API)</p>
+            <a href="@Url.Action("ShowJsonResult")" class="btn btn-warning" target="_blank">Xem JsonResult</a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-secondary text-white">
+            <h5>5. FileResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Trả về file để download hoặc hiển thị</p>
+            <a href="@Url.Action("ShowFileResult")" class="btn btn-secondary">Download File Text</a>
+            <a href="@Url.Action("DownloadPdf")" class="btn btn-secondary">Download PDF</a>
+            <a href="@Url.Action("ShowImage")" class="btn btn-secondary" target="_blank">Xem Image</a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-danger text-white">
+            <h5>6. StatusCodeResult</h5>
+        </div>
+        <div class="card-body">
+            <p>Trả về mã trạng thái HTTP</p>
+            <a href="@Url.Action("ShowStatusCodeResult")" class="btn btn-danger">404 Not Found</a>
+            <a href="@Url.Action("ShowStatusCode500")" class="btn btn-danger">500 Server Error</a>
+            <a href="@Url.Action("ShowNotFound")" class="btn btn-danger">NotFound()</a>
+            <a href="@Url.Action("ShowBadRequest")" class="btn btn-danger">BadRequest()</a>
+        </div>
+    </div>
+</div>
