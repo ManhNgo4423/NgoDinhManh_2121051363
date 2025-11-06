@@ -1,0 +1,27 @@
+@model YourProjectName.Models.HocSinh // Khai báo Model
+
+@{
+    ViewData["Title"] = "Hien Thi Thong Tin Hoc Sinh";
+}
+
+<h2>Demo Model - View - Controller (Hiển thị)</h2>
+<hr />
+
+<p>
+    Dữ liệu Model đã được View (NhapHocSinh) gửi về Controller (XuLyHocSinh), 
+    Controller xử lý (tăng tuổi lên 1) và trả lại Model cho View này hiển thị.
+</p>
+
+<ul>
+    <li>
+        <strong>Mã Học Sinh:</strong> @Model.MaHS
+    </li>
+    <li>
+        <strong>Tên Học Sinh:</strong> @Model.TenHS
+    </li>
+    <li>
+        <strong>Tuổi (đã xử lý):</strong> @Model.Tuoi
+    </li>
+</ul>
+
+<a asp-controller="Buoi4" asp-action="NhapHocSinh">Quay lại trang nhập liệu</a>

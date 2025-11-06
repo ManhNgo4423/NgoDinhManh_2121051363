@@ -1,0 +1,27 @@
+@model YourProjectName.Models.HocSinh // Khai báo Model
+
+@{
+    ViewData["Title"] = "Nhap Thong Tin Hoc Sinh";
+}
+
+<h2>Demo Model - View - Controller (Nhập liệu)</h2>
+<hr />
+
+<form method="post" asp-controller="Buoi4" asp-action="XuLyHocSinh">
+    <div>
+        <label asp-for="MaHS">Mã Học Sinh:</label>
+        <input asp-for="MaHS" type="number" required />
+    </div>
+    <br />
+    <div>
+        <label asp-for="TenHS">Tên Học Sinh:</label>
+        <input asp-for="TenHS" type="text" required />
+    </div>
+    <br />
+    <div>
+        <label asp-for="Tuoi">Tuổi:</label>
+        <input asp-for="Tuoi" type="number" required />
+    </div>
+    <br />
+    <button type="submit">Xử Lý và Hiển Thị</button>
+</form>

@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Demo Hien Thi Du Lieu";
+    // Đọc lại ViewBag/ViewData từ action DemoDuLieu trước đó nếu không dùng RedirectToAction
+    // Nếu dùng RedirectToAction như code mẫu, ViewBag/ViewData sẽ không còn.
+    var thongBaoViewBag = ViewBag.ThongBaoViewBag; // Sẽ là null nếu qua Redirect
+    var thongBaoViewData = ViewData["ThongBaoViewData"]; // Sẽ là null nếu qua Redirect
+    
+    // Đọc TempData
+    var thongBaoTempData = TempData["ThongBaoTempData"];
+}
+
+<h2>Demo Sử dụng ViewBag, ViewData, TempData</h2>
+<hr />
+
+<p>
+    <strong>ViewBag (Sau Redirect):</strong> 
+    <span style="color: red;">@thongBaoViewBag</span> 
+    (Thường là null sau Redirect. Cần dùng `ViewBag.ThongBaoViewBag = "..."` trong action hiện tại nếu muốn hiển thị.)
+</p>
+
+<p>
+    <strong>ViewData (Sau Redirect):</strong> 
+    <span style="color: red;">@thongBaoViewData</span> 
+    (Thường là null sau Redirect.)
+</p>
+
+<p>
+    <strong>TempData (Sau Redirect):</strong> 
+    <span style="color: green;">@thongBaoTempData</span> 
+    (Dữ liệu được giữ lại sau khi chuyển hướng.)
+</p>
+
+<p>
+    <em>Lưu ý: ViewBag và ViewData chỉ tồn tại trong 1 Request. TempData tồn tại trong 1 Request hiện tại và Request tiếp theo sau Redirect.</em>
+</p>
+
+<a asp-controller="Buoi4" asp-action="DemoDuLieu">Quay lại Demo</a>

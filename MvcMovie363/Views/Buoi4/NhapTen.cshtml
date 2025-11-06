@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Nhap Ten";
+}
+
+<h2>Demo View gửi dữ liệu về Controller (Query String)</h2>
+<hr />
+
+<form method="get" asp-controller="Buoi4" asp-action="ChucMung">
+    <label for="tenNguoiDung">Nhập tên của bạn:</label>
+    <input type="text" id="tenNguoiDung" name="tenNguoiDung" required />
+    <button type="submit">Gửi</button>
+</form>
+
+@if (ViewBag.Loi != null)
+{
+    <p style="color: red;">@ViewBag.Loi</p>
+}
