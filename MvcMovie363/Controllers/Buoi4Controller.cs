@@ -9,7 +9,6 @@ namespace MvcMovie363.Controllers
         // 1. Dùng ViewBag, ViewData, TempData
         public IActionResult DemoDuLieu()
         {
-            // 1.1. ViewBag và ViewData: Dữ liệu chỉ tồn tại trong Request hiện tại
             ViewBag.ThongBaoViewBag = "Chào mừng bạn đến với Buổi 4 - Dùng ViewBag!";
             ViewData["ThongBaoViewData"] = "Đây là thông báo từ ViewData.";
 
