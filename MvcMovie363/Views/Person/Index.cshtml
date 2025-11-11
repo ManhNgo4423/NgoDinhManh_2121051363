@@ -1,0 +1,36 @@
+@using System
+@{
+    // Thiết lập tiêu đề trang nếu cần
+    ViewData["Title"] = "Thông Tin Cá Nhân";
+    int currentYear = DateTime.Now.Year;
+}
+
+<h2>Nhập Thông Tin</h2>
+
+<form method="post" asp-controller="Person" asp-action="Index">
+    <div>
+        <label for="FullName">Họ và Tên:</label>
+        <input type="text" name="FullName" required value="@ViewBag.FullName" />
+    </div>
+    <div>
+        <label for="NamSinh">Năm Sinh:</label>
+        @* Trường NamSinh *@
+        <input 
+            type="number" 
+            name="NamSinh" 
+            min="1900" 
+            max="@currentYear" 
+            value="@(ViewBag.NamSinh == null || ViewBag.NamSinh == 0 ? "" : ViewBag.NamSinh)" 
+        />
+    </div>
+    <br/>
+    <button type="submit">Gửi Thông Tin</button>
+</form>
+
+<hr/>
+
+@* PHẦN HIỂN THỊ KẾT QUẢ TỪ ViewBag.Message *@
+@if (ViewBag.Message != null)
+{
+    <p>@Html.Raw(ViewBag.Message)</p>
+}
