@@ -18,18 +18,18 @@ public class PersonController : Controller
 
     [HttpPost]
     public IActionResult Index(string? FullName, int NamSinh = 0) 
-    {
-        ViewBag.FullName = FullName;
-        ViewBag.NamSinh = NamSinh;
-        
+    { 
         string strOutput = "";
         if (string.IsNullOrEmpty(FullName))
         {
-            ViewBag.Message = "Vui lòng nhập Tên và Địa chỉ.";
+            ViewBag.Message = "Vui lòng nhập Tên";
             return View(); 
         }
 
         strOutput = $"Xin chào {FullName}";
+
+        ViewBag.FullName = FullName;
+        ViewBag.NamSinh = NamSinh;
         
         int currentYear = DateTime.Now.Year;
         int age = 0;
