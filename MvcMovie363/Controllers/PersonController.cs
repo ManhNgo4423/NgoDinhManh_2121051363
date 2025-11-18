@@ -1,51 +1,121 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.EntityFrameworkCore;
+using MvcMovie.Data;
+using MvcMovie.Models;
+
 
 public class PersonController : Controller
 {
-    private readonly ILogger<PersonController> _logger;
-
-    public PersonController(ILogger<PersonController> logger)
-    {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult Index(string? FullName, int NamSinh = 0) 
-    { 
-        string strOutput = "";
-        if (string.IsNullOrEmpty(FullName))
+private readonly ApplicationDbContext _context;
+public PersonController(ApplicationDbContext context) 
+{
+    _context = context;
+}
+public async Task<IActionResult> Index() 
+{
+    var model = await _context.Person.ToListAsync();
+    return View(model);
+}
+public IActionResult Create() 
+{
+    return View();
+}
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Create([Bind("PersonId, FullName, Address")] Person person)
+{
+    if (ModelState.IsValid)
         {
-            ViewBag.Message = "Vui lòng nhập Tên";
-            return View(); 
+            _context.Add(person);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+        return View(person);
+}
+public async Task<IActionResult> Edit(string id) 
+{
+    if (id == null || _context.Person == null)
+{
+    return NotFound();
+}
+var person = await _context.Person.FindAsync(id);
+if (person == null)
+{
+    return NotFound();
+}
+return View(person);
+}
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(string id, [Bind("PersonId, FullName, Address")] Person person)
+{
+    if (id != person.PersonId)
+{
+    return NotFound();
+}
 
-        strOutput = $"Xin chào {FullName}";
-
-        ViewBag.FullName = FullName;
-        ViewBag.NamSinh = NamSinh;
-        
-        int currentYear = DateTime.Now.Year;
-        int age = 0;
-
-        if (NamSinh > 1900 && NamSinh < currentYear)
-        {
-            age = currentYear - NamSinh;
-            strOutput += $". Năm nay bạn {age} tuổi.";
-        } 
-        else if (NamSinh != 0)
-        {
-             strOutput += $". Năm sinh {NamSinh} không hợp lệ.";
-        }
-
-        ViewBag.Message = strOutput;
-        
-        return View();
+if (ModelState.IsValid)
+{
+    try
+    {
+        _context.Update(person);
+        await _context.SaveChangesAsync();
     }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (!PersonExists(person.PersonId))
+        {
+            return NotFound();
+        }
+        else
+        {
+            throw;
+        }
+    }
+    return RedirectToAction(nameof(Index));
+}
+return View(person);
+}
+public async Task<IActionResult> Delete(string id) 
+{
+    if (id == null || _context.Person == null)
+{
+    return NotFound();
+}
+
+var person = await _context.Person
+    .FirstOrDefaultAsync(m => m.PersonId == id);
+
+if (person == null)
+{
+    return NotFound();
+}
+
+return View(person);
+}
+[HttpPost, ActionName("Delete")]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(string id)
+{
+    if (_context.Person == null)
+{
+    return Problem("Entity set 'ApplicationDbContext.Person' is null.");
+}
+
+var person = await _context.Person.FindAsync(id);
+
+if (person != null)
+{
+    _context.Person.Remove(person);
+    await _context.SaveChangesAsync();
+}
+
+return RedirectToAction(nameof(Index));
+}
+private bool PersonExists(string id) 
+{
+    return _context.Person?.Any(e => e.PersonId == id) ?? false;
+}
 }
