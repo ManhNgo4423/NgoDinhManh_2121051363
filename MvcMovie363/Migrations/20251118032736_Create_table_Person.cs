@@ -11,7 +11,7 @@ namespace MvcMovie.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Person1",
+                name: "Person",
                 columns: table => new
                 {
                     PersonId = table.Column<string>(type: "TEXT", nullable: false),
@@ -20,7 +20,7 @@ namespace MvcMovie.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person1", x => x.PersonId);
+                    table.PrimaryKey("PK_Person", x => x.PersonId);
                 });
         }
 
@@ -28,7 +28,7 @@ namespace MvcMovie.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Person1");
+                name: "Person");
         }
     }
 }
